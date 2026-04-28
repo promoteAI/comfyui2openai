@@ -1,0 +1,2 @@
+# comfyui2openai
+将comfyui中工作流转成openai格式的API，便于其他系统集成
