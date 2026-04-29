@@ -1,0 +1,238 @@
+{
+  "60": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "433:8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "435": {
+    "inputs": {
+      "value": "masterpiece，best quality，8K，超高清，写实古风电影质感，第一镜首帧，正面全身固定构图，20 岁女性沈知微，镇国公府嫡女，魂断濒死状态，被生锈铁链锁住双手与脚踝，捆绑在腐朽木柱上，脊背挺直傲骨凛然；面部有一道从眉骨到下颌的狰狞血痕，满脸血污与伤痕，嘴唇惨白干裂，双眼直视前方，眼神充满滔天恨意与绝望不屈，神色凛冽无卑微；黑发凌乱沾满血污与稻草，无任何头饰；身穿破烂不堪的白色粗布囚衣，心口被匕首刺入，鲜血浸染衣物，赤足双脚布满伤痕冻疮；整体气质悲怆惨烈、清冷狠绝，电影级侧逆光，冷蓝灰压抑色调，超写实皮肤纹理，布料破损、血迹、铁链锈迹细节拉满，人物居中、全身完整、无裁切、无背景杂物干扰"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "437": {
+    "inputs": {
+      "image": "ComfyUI_00039_.png [output]"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "433:75": {
+    "inputs": {
+      "strength": 1,
+      "model": [
+        "433:66",
+        0
+      ]
+    },
+    "class_type": "CFGNorm",
+    "_meta": {
+      "title": "CFG归一化"
+    }
+  },
+  "433:39": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "433:38": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "433:37": {
+    "inputs": {
+      "unet_name": "qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "433:110": {
+    "inputs": {
+      "prompt": "",
+      "clip": [
+        "433:38",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ],
+      "image1": [
+        "433:440",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "文本编码（QwenImageEditPlus）"
+    }
+  },
+  "433:66": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "433:89",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "采样算法（AuraFlow）"
+    }
+  },
+  "433:111": {
+    "inputs": {
+      "prompt": [
+        "435",
+        0
+      ],
+      "clip": [
+        "433:38",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ],
+      "image1": [
+        "433:440",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "文本编码（QwenImageEditPlus）"
+    }
+  },
+  "433:88": {
+    "inputs": {
+      "pixels": [
+        "433:440",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE编码"
+    }
+  },
+  "433:8": {
+    "inputs": {
+      "samples": [
+        "433:3",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "433:89": {
+    "inputs": {
+      "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "strength_model": 1,
+      "model": [
+        "433:37",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "433:117": {
+    "inputs": {
+      "image": [
+        "437",
+        0
+      ]
+    },
+    "class_type": "FluxKontextImageScale",
+    "_meta": {
+      "title": "图像缩放为FluxKontext"
+    }
+  },
+  "433:3": {
+    "inputs": {
+      "seed": 132262885512616,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "433:75",
+        0
+      ],
+      "positive": [
+        "433:111",
+        0
+      ],
+      "negative": [
+        "433:110",
+        0
+      ],
+      "latent_image": [
+        "433:88",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "433:440": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 1080,
+      "height": 720,
+      "crop": "disabled",
+      "image": [
+        "433:117",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "缩放图像"
+    }
+  }
+}

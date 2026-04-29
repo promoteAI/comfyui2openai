@@ -1,0 +1,266 @@
+{
+  "60": {
+    "inputs": {
+      "filename_prefix": "Qwen-Image-2512",
+      "images": [
+        "238:231",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "238:219": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled-fa4e76cba1c2.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "238:220": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "238:222": {
+    "inputs": {
+      "shift": 3.1000000000000005,
+      "model": [
+        "238:233",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "采样算法（AuraFlow）"
+    }
+  },
+  "238:226": {
+    "inputs": {
+      "unet_name": "qwen_image_2512_fp8_e4m3fn.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "238:227": {
+    "inputs": {
+      "text": "【画风·最高优先级】四格统一：超写实摄影风格，8K超清细节，精准自然光照，真实皮肤纹理，专业摄影机拍摄，RAW原片质感，超高清锐度，人物面部毛孔清晰可见\nMANDATORY ART STYLE (all 4 panels): photorealistic, ultra-detailed, 8k uhd, sharp focus, natural lighting, real skin texture, hyperrealism, professional photography, RAW photo.\n\nCharacter orthographic sheet — image only, no text reply.\n\nONE image: 2×2 grid. TL=head close-up (top of head to collarbone). TR=front full body. BL=left profile full body (90°). BR=back full body (180°). Panels 2–4: full figure head-to-toe, upright stance, arms at sides, empty hands, neutral face (closed lips).\n\nSolid white only (RGB 255,255,255). No text/labels/watermarks, no environment/ground/shadows, no handheld props. Same character in all panels; soft even lighting; high detail. Follow ART STYLE / 画风 block at the start of the user message if present.\n\n---\n\n【基础设定】  \n人物基础: 女性，28岁，身高约162cm，中等偏清瘦体型，肩背肌肉线条清晰可见，脖颈呈自然微前倾姿态（非病理弯曲，为长期伏案形成的静态体态）  \n五官: 细长平直眉形，内双杏眼，瞳色深棕近黑，鼻梁窄直、鼻翼微收，唇形偏薄、唇峰明显、唇线清晰，下颌角锐利，颧骨高而外扩呈明确骨性凸起  \n表情: 眉毛自然平放无抬压，双眼平视正前方，眼睑开度适中，无眯眼或睁大，双唇自然闭合，嘴角无上扬或下垂，面部肌肉完全放松（标准中性表情）  \n发型: 黑色，齐肩长度（发尾位于锁骨下缘±1cm），发质微粗硬带自然毛躁感，发丝纹理清晰可见蓬松碎感，左侧耳际上方3cm处别一枚银色齿轮状发卡（直径约1.8cm，表面哑光，齿纹磨损可见，边缘圆钝无锋利反光）  \n服装: 深蓝色水洗牛仔外套（经典修身短款，前襟五粒扣，双胸贴袋带明线缉线，肩线贴合，袖长至腕骨下方1cm），内搭灰黑色连帽衫（纯色无图案，连帽结构完整，帽口罗纹收口，领口为常规圆领叠于牛仔外套领下）；牛仔外套袖口经反复穿着已磨出细密浅灰绒边（宽度约2mm，分布于袖口外侧及前缘）  \n姿态: 双脚并拢站立，脊柱自然挺直但颈段轻度前移（枕骨点较胸椎T1棘突前移约2.5cm，符合描述中的伏案体态），双臂自然下垂贴于身体两侧，手掌朝向大腿外侧，手指微屈呈放松状态  \n\n【第1格-头部特写】  \n聚焦面部细节: 深棕色虹膜纹理清晰可见，瞳孔边缘锐利，睫毛根部浓密、中段微翘、末梢纤细分叉；眼下卧蚕呈青灰色调（非肿胀，为薄皮下血管透出的静态色素沉着），皮肤薄而通透，可见细微皮下毛细血管与浅层汗孔；唇部干燥感轻微，上唇中央有自然细纵纹，下唇略丰于上唇；发际线呈自然M形微凹，额角处有细软绒毛，左侧齿轮发卡金属表面无镜面反光，齿槽内有氧化暗痕  \n\n【第2格-正面全身】  \n目光平视正前方；牛仔外套前襟五粒扣全部系闭，门襟对称笔直，左胸袋盖平整无翘起，右胸袋盖下缘与第二颗纽扣上沿齐平；连帽衫帽身完全收纳于外套内，仅见帽口罗纹边缘隐现于后颈；双手自然下垂，左手腕智能手表表盘朝前，哑光黑表盘无反光，表带为单排孔硅胶材质，边缘划痕呈哑光白线状（最长约3mm），右手五指自然伸展，指腹茧位于食指与中指远节掌侧（位置固定、边界清晰）  \n\n【第3格-侧面全身】  \n90度左侧面：耳廓轮廓清晰，耳垂薄而圆润；左侧齿轮发卡完整显露于耳前上方，齿轮平面与太阳穴平行；下颌线自耳垂下方延伸至下颌角，转折锐利无赘肉；牛仔外套左肩缝线紧贴肩峰，袖筒沿上臂外侧垂直垂落，袖口绒边在侧光下呈现细腻毛绒质感；连帽衫帽口罗纹在颈侧形成一道柔和环状褶皱；腰线自然内收，外套下摆止于髂嵴下缘，露出约2cm连帽衫下摆灰黑色底边  \n\n【第4格-背面全身】  \n后脑发丝走向自然向两侧微散，发尾齐整略外翘；齿轮发卡位于左后侧头骨乳突上方约1.5cm处，卡柄嵌入发丝不可见；牛仔外套后片平整无褶，肩胛骨轮廓在薄外套下轻微显形；后领高度齐平第七颈椎棘突，领口内侧连帽衫灰黑色罗纹领边外露约3mm；外套下摆后中线垂直，两侧摆角对称，连帽衫下摆于腰线下方2cm处形成平直底边；双手背朝后，手指自然微屈，左手腕表带划痕在背光角度下呈哑光灰白色短线，右手小指外侧可见轻微纵向细纹（长期握笔形成）\n\n---\n\nGENDER: female only — feminine build and facial features; do not masculinize. Reiterate: same art style as above (photorealistic, ultra-detailed, 8k uhd, sharp focus, natural lighting, real skin texture, hyperrealism, professional photography, RAW photo).",
+      "clip": [
+        "238:219",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "238:228": {
+    "inputs": {
+      "text": "低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感。构图混乱。文字模糊，扭曲",
+      "clip": [
+        "238:219",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "238:231": {
+    "inputs": {
+      "samples": [
+        "238:230",
+        0
+      ],
+      "vae": [
+        "238:220",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "238:232": {
+    "inputs": {
+      "width": 1920,
+      "height": 1088,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "空Latent图像（SD3）"
+    }
+  },
+  "238:230": {
+    "inputs": {
+      "seed": 138390833908835,
+      "steps": [
+        "238:240",
+        0
+      ],
+      "cfg": [
+        "238:243",
+        0
+      ],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "238:222",
+        0
+      ],
+      "positive": [
+        "238:227",
+        0
+      ],
+      "negative": [
+        "238:228",
+        0
+      ],
+      "latent_image": [
+        "238:232",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "238:223": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "238:229": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Enable 4 Steps LoRA?"
+    }
+  },
+  "238:225": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Steps"
+    }
+  },
+  "238:218": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "238:221": {
+    "inputs": {
+      "lora_name": "Qwen-Image-2512-Lightning-4steps-V1.0-fp32.safetensors",
+      "strength_model": 1,
+      "model": [
+        "238:226",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "238:233": {
+    "inputs": {
+      "switch": [
+        "238:229",
+        0
+      ],
+      "on_false": [
+        "238:226",
+        0
+      ],
+      "on_true": [
+        "238:221",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Switch (model)"
+    }
+  },
+  "238:240": {
+    "inputs": {
+      "switch": [
+        "238:229",
+        0
+      ],
+      "on_false": [
+        "238:224",
+        0
+      ],
+      "on_true": [
+        "238:225",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Switch (steps)"
+    }
+  },
+  "238:243": {
+    "inputs": {
+      "switch": [
+        "238:229",
+        0
+      ],
+      "on_false": [
+        "238:223",
+        0
+      ],
+      "on_true": [
+        "238:218",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Switch (cfg)"
+    }
+  },
+  "238:224": {
+    "inputs": {
+      "value": 50
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Steps"
+    }
+  }
+}
