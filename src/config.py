@@ -81,9 +81,9 @@ class Config:
 
 
 def load_config() -> Config:
-    project_root = Path(__file__).resolve().parents[2]
+    project_root = Path(__file__).resolve().parents[1]
 
-    workflows_dir = Path(_env_str("WORKFLOWS_DIR", str(project_root / "comfyui-api-workflows"))).expanduser()
+    workflows_dir = Path(_env_str("WORKFLOWS_DIR", str(project_root / "comfyui_api_workflows"))).expanduser()
     runs_dir = Path(_env_str("RUNS_DIR", str(project_root / "runs"))).expanduser()
 
     comfyui_input_dir = Path(
@@ -119,8 +119,8 @@ def load_config() -> Config:
         job_cleanup_interval_s=job_cleanup_interval_s,
         signed_url_secret=_env_str("SIGNED_URL_SECRET", ""),
         signed_url_ttl_seconds=max(1, _env_int("SIGNED_URL_TTL_SECONDS", 3600)),
-        default_txt2img_workflow=_env_str("DEFAULT_TXT2IMG_WORKFLOW", "文生图_z_image_turbo.json"),
-        default_img2img_workflow=_env_str("DEFAULT_IMG2IMG_WORKFLOW", "图生图_flux2.json"),
-        default_txt2video_workflow=_env_str("DEFAULT_TXT2VIDEO_WORKFLOW", ""),
-        default_img2video_workflow=_env_str("DEFAULT_IMG2VIDEO_WORKFLOW", "img2video.json"),
+        default_txt2img_workflow=_env_str("DEFAULT_TXT2IMG_WORKFLOW", "文生图.json"),
+        default_img2img_workflow=_env_str("DEFAULT_IMG2IMG_WORKFLOW", "图生图.json"),
+        default_txt2video_workflow=_env_str("DEFAULT_TXT2VIDEO_WORKFLOW", "文生视频.json"),
+        default_img2video_workflow=_env_str("DEFAULT_IMG2VIDEO_WORKFLOW", "图生视频.json"),
     )

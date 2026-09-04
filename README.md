@@ -132,7 +132,7 @@ uvicorn --env-file .env src.app:app --host 0.0.0.0 --port 8000
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
 | `DEFAULT_TXT2IMG_WORKFLOW` | `文生图.json` | 默认文生图工作流 |
-| `DEFAULT_IMG2IMG_WORKFLOW` | `图片编辑.json` | 默认图生图工作流 |
+| `DEFAULT_IMG2IMG_WORKFLOW` | `图生图.json` | 默认图生图工作流 |
 | `DEFAULT_TXT2VIDEO_WORKFLOW` | `文生视频.json` | 默认文生视频工作流 |
 | `DEFAULT_IMG2VIDEO_WORKFLOW` | `图生视频.json` | 默认图生视频工作流 |
 
@@ -153,6 +153,12 @@ uvicorn --env-file .env src.app:app --host 0.0.0.0 --port 8000
 | `/v1/workflows` | GET | 列出所有工作流 |
 | `/v1/workflows/{name}/parameters` | GET | 查看工作流参数 |
 | `/runs/{job_id}/{output_name}` | GET | 下载输出文件 |
+
+未传 `model` 或 `workflow` 时，服务会按 API 路径自动选择相应类型的工作流：
+`/v1/images/generations` 使用文生图，`/v1/images/edits` 和
+`/v1/images/variations` 使用图生图。它会优先使用相应的
+`DEFAULT_*_WORKFLOW`；若该配置的工作流已被删除或改名，则回退到已加载的第一个兼容工作流。
+传入 `model` 或 `workflow` 时仍会显式选择指定工作流。
 
 ### 认证方式
 
@@ -189,7 +195,7 @@ curl -X POST http://127.0.0.1:8000/v1/images/edits \
   -H "Authorization: Bearer your-token" \
   -F "image=@input.jpg" \
   -F "prompt=转换为油画风格" \
-  -F "workflow=图片编辑.json"
+  -F "workflow=图生图.json"
 ```
 
 ### 提交自定义任务
@@ -248,7 +254,7 @@ print(response.data[0].url)
 
 # 图像编辑
 response = client.images.edit(
-    model="图片编辑",
+    model="图生图",
     image=open("input.jpg", "rb"),
     prompt="转换为油画风格"
 )
