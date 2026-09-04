@@ -1006,17 +1006,32 @@ def create_app() -> FastAPI:
         return _chat_completion_response(model=public_model, content_payload=payload)
 
     async def _pick_default_workflow(kind: str) -> str:
-        if kind == "txt2img":
-            return cfg.default_txt2img_workflow
-        if kind == "img2img":
-            return cfg.default_img2img_workflow
-        if kind == "txt2video":
-            if not cfg.default_txt2video_workflow:
-                raise _openai_error("DEFAULT_TXT2VIDEO_WORKFLOW is not set", http_status=400)
-            return cfg.default_txt2video_workflow
-        if kind == "img2video":
-            return cfg.default_img2video_workflow
-        raise _openai_error(f"Unsupported kind: {kind}", http_status=400)
+        """Choose a compatible workflow when an endpoint request omits model/workflow."""
+        configured = {
+            "txt2img": cfg.default_txt2img_workflow,
+            "img2img": cfg.default_img2img_workflow,
+            "txt2video": cfg.default_txt2video_workflow,
+            "img2video": cfg.default_img2video_workflow,
+        }.get(kind)
+        if configured is None:
+            raise _openai_error(f"Unsupported kind: {kind}", http_status=400)
+
+        # Keep configured defaults deterministic, but continue routing by endpoint
+        # when a workflow was renamed or removed.
+        if configured:
+            try:
+                workflow = await _resolve_workflow_name(configured)
+            except HTTPException as exc:
+                if exc.status_code != 404:
+                    raise
+            else:
+                if _workflow_supports_kind(workflow, kind):
+                    return workflow.name
+
+        compatible = [workflow for workflow in await registry.list() if _workflow_supports_kind(workflow, kind)]
+        if compatible:
+            return min(compatible, key=lambda workflow: workflow.name.casefold()).name
+        raise _openai_error(f"No workflow supports {kind}", http_status=404)
 
     @app.post("/v1/jobs")
     async def submit_job(

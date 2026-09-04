@@ -25,7 +25,7 @@ def _load_env() -> None:
 
     _try_load_dotenv(Path.cwd() / ".env")
 
-    project_root = Path(__file__).resolve().parents[2]
+    project_root = Path(__file__).resolve().parents[1]
     _try_load_dotenv(project_root / ".env")
 
 
